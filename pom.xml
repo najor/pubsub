@@ -59,26 +59,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<id>dist</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<attach>true</attach>
-							<appendAssemblyId>false</appendAssemblyId>
-							<descriptors>
-								<descriptor>${project.basedir}/src/main/assembly/package.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
@@ -98,6 +78,26 @@
 									<outputDirectory>${project.basedir}/src/main/js/shared/</outputDirectory>
 								</artifactItem>
 							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>dist</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<attach>true</attach>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>${project.basedir}/src/main/assembly/package.xml</descriptor>
+							</descriptors>
 						</configuration>
 					</execution>
 				</executions>
@@ -160,7 +160,7 @@
 							</excludes>
 							<disallowInsecureCharsInRegExp>false</disallowInsecureCharsInRegExp>
 							<allowOneVarStatementPerFunction>false</allowOneVarStatementPerFunction>
-							<predefinedVars>window, global, process, define, require, jQuery</predefinedVars>
+							<predefinedVars>window, global, process, define, require, jQuery, GCN</predefinedVars>
 							<assumeABrowser>true</assumeABrowser>
 							<tolerateContinuation>true</tolerateContinuation>
 						</configuration>
