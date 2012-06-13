@@ -4,17 +4,11 @@
 
 	<title>PubSub</title>
 
-	<script src="shared/require.js"></script>
+	<script src="shared/vendor/require.js"></script>
 	<script src="shared/module-paths.js"></script>
 	<script>
-		var paths = SHARED_MODULE_PATHS;
-		paths['PubSub'] = 'lib/pubsub';
-		require.config({
-			paths: paths
-		});
-	</script>
-
-	<script>
+		__DEPS__.paths['PubSub'] = 'lib/pubsub';
+		require.config({paths: __DEPS__.paths});
 	</script>
 	<style>
 		body {

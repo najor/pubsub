@@ -2,6 +2,6 @@
 
 <groups xmlns="http://www.isdc.ro/wro">
 	<group name='pubsub'>
-		<js>/pubsub.js</js>
+		<js>/lib/pubsub.js</js>
 	</group>
 </groups>

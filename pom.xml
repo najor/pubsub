@@ -160,7 +160,7 @@
 							</excludes>
 							<disallowInsecureCharsInRegExp>false</disallowInsecureCharsInRegExp>
 							<allowOneVarStatementPerFunction>false</allowOneVarStatementPerFunction>
-							<predefinedVars>window, global, process, define, require, jQuery, GCN</predefinedVars>
+							<predefinedVars>window, global, process, define, require, jQuery</predefinedVars>
 							<assumeABrowser>true</assumeABrowser>
 							<tolerateContinuation>true</tolerateContinuation>
 						</configuration>
