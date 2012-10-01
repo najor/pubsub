@@ -10,31 +10,28 @@ define('PubSub', [], function () {
 	'use strict';
 
 	/**
-	 * A hash of channel names mapped to an array of ids of subscriptions that
-	 * are listening on that channel.
+	 * A hash of channel names mapped to an array of ids of the subscriptions
+	 * that are listening on that channel.
 	 *
-	 * @type {object<string, array.<number>>}
-	 * @private
+	 * @type {Object<String, Array.<Number>>}
 	 */
 	var channels = {};
 
 	/**
 	 * A hash of subscription tuples (channel, callback), mapped against unique
 	 * ids assigned to each subscription.
-	 * As subscriptions are removed from this object via `unsub()' this object
+	 * As subscriptions are removed from this object via unsub() this object
 	 * will become a sparse array.
 	 *
-	 * @type {object<number, object>}
-	 * @private
+	 * @type {Object<Number, Object>}
 	 */
 	var subscriptions = {};
 
 	/**
 	 * The last used subscription id.  This values is only used and modified in
-	 * `sub().'
+	 * sub().
 	 *
 	 * @type {number}
-	 * @private
 	 */
 	var sid = 0;
 
@@ -42,9 +39,8 @@ define('PubSub', [], function () {
 	 * Returns the channel to which a subscription matching the given sid is
 	 * listening on.
 	 *
-	 * @param {number} sid Id of subscription.
-	 * @return {array<object>} sid Id of subscription.
-	 * @private
+	 * @param {Number} sid Id of subscription.
+	 * @return {Array.<Object>} sid Id of subscription.
 	 */
 	function getSubscriptionChannel(sid) {
 		return subscriptions[sid] && channels[subscriptions[sid].channel];
@@ -52,15 +48,14 @@ define('PubSub', [], function () {
 
 	/**
 	 * Publishes a message `message' on the given channel.
-	 * All callbacks that have {@link FormEngine.sub()}scribed to listen on
-	 * this channel will be invoked and receive `message' as their only
-	 * argument.
+	 * All callbacks that have sub()scribed to listen on this channel will be
+	 * invoked and receive `message' as their only argument.
 	 *
 	 * @private
-	 * @param {string} channel Name of channel to publish the message on.
+	 * @param {String} channel Name of channel to publish the message on.
 	 * @param {*} message Variable to pass to all callbacks listening on the
 	 *                    given channel.
-	 * @return {number} The number of subscribed callbacks that were invoked.
+	 * @return {Number} The number of subscribed callbacks that were invoked.
 	 */
 	function pub(channel, message) {
 		if (!channels[channel]) {
@@ -101,18 +96,14 @@ define('PubSub', [], function () {
 		 * This id can be used to unsubscribe this subscription from the given
 		 * channel.
 		 *
-		 * @public
-		 * @function
-		 * @name sub
-		 * @methodOf FormEngine
-		 * @param {string} channel Name of channel to listen on.
-		 * @param {function(object)} callback Function to be invoked when
+		 * @param {String} channel Name of channel to listen on.
+		 * @param {Function(Object)} callback Function to be invoked when
 		 *                                    messages are published on the
 		 *                                    given channel.
-		 * @return {number} Positive integer representing the sid of this
-		 *                  subscription, that can be used with
-		 *                  {@link FormEngine.unsub()} if subscription succeeds.
-		 *                  Otherwise the return value is -1;
+		 * @return {Number} Positive integer representing the sid of this
+		 *                  subscription, that can be used with unsub() if
+		 *                  subscription succeeds.  Otherwise the return value
+		 *                  is -1;
 		 */
 		sub: function (channel, callback) {
 			if (typeof callback !== 'function') {
@@ -126,7 +117,6 @@ define('PubSub', [], function () {
 			}
 
 			subscriptionIds.push(++sid);
-
 			subscriptions[sid] = {
 				channel  : channel,
 				callback : callback
@@ -136,17 +126,12 @@ define('PubSub', [], function () {
 		},
 
 		/**
-		 * Unsubscribes callback using an sid which was returned by
-		 * {@link FormEngine.sub()} when the callback was subscribed.  Returns
-		 * true if a subscription for this sid was found and removed, otherwise
-		 * returns false.
+		 * Unsubscribes callback using an sid which was returned by sub() when
+		 * the callback was subscribed.  Returns true if a subscription for
+		 * this sid was found and removed, otherwise returns false.
 		 *
-		 * @public
-		 * @function
-		 * @name unsub
-		 * @methodOf FormEngine
-		 * @param {number} sid Id of subscription.
-		 * @return {boolean} True if a a subscription matching this sid was
+		 * @param {Number} sid Id of subscription.
+		 * @return {Boolean} True if a a subscription matching this sid was
 		 *                   removed.
 		 */
 		unsub: function (sid) {
@@ -159,7 +144,6 @@ define('PubSub', [], function () {
 			// assert(typeof subscriptionIds === 'array')
 
 			delete subscriptions[sid];
-
 			var j = subscriptionIds.length;
 
 			while (j) {
@@ -176,14 +160,10 @@ define('PubSub', [], function () {
 		 * Publishes a message `message' on all channels that can be derived
 		 * from the given channel name.
 		 *
-		 * @public
-		 * @function
-		 * @name pub
-		 * @methodOf FormEngine
-		 * @param {string} channel Name of channel to publish the message on.
+		 * @param {String} channel Name of channel to publish the message on.
 		 * @param {*} message Variable to pass to all callbacks listening on
 		 *                    the given channel.
-		 * @return {number} The number of subscribed callbacks that were
+		 * @return {Number} The number of subscribed callbacks that were
 		 *                  invoked.
 		 */
 		pub: function (channel, message) {
