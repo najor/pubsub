@@ -69,7 +69,7 @@ define('PubSub', [], function () {
 
 		if (!message) {
 			message = {};
-		} else if (jQuery.type(message) !== 'object') {
+		} else if (typeof message !== 'object') {
 			message = {
 				data: message
 			};
@@ -79,7 +79,7 @@ define('PubSub', [], function () {
 
 		// Clone a immutable snapshot of the subscription ids that we can
 		// safetly iterate over.
-		var sids = channels[channel].concat();
+		var sids = channels[channel].slice();
 
 		// NB: It is necessary to read the size of the `sids' array on each
 		// iteration, in case the size changes (via unsubscription) between
